@@ -1,0 +1,40 @@
+<!--
+  ~ Copyright (c) Crio.Do 2018. All rights reserved
+  -->
+
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
+  xmlns="http://java.sun.com/xml/ns/persistence"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="qrideDatabaseEmbedded">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>tables.CarStatusTable</class>
+    <class>tables.CarDetailsTable</class>
+    <class>tables.DriverDetailsTable</class>
+    <class>tables.TripTable</class>
+    <properties>
+      <property name="hibernate.connection.url"
+        value="jdbc:h2:mem:qrideEmbeddedDB"/>
+      <property name="hibernate.connection.username" value="sa"/>
+      <property name="show_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="qrideMySQLDB">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>tables.CarStatusTable</class>
+    <class>tables.CarDetailsTable</class>
+    <class>tables.DriverDetailsTable</class>
+    <class>tables.TripTable</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <!-- TIP:MODULE_SCHEDULETRIP: Set the url:port, user & password appropriately if you want to use
+       MySQL database -->
+      <property name="javax.persistence.jdbc.url"
+        value="jdbc:mysql://localhost:3306/qrideMySQLDB?autoReconnect=true&amp;useSSL=false"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.password" value="crio123"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+</persistence>

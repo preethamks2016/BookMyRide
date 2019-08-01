@@ -1,0 +1,51 @@
+/*
+ * Copyright (c) Crio.Do 2018. All rights reserved
+ */
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin" +
+                ":$rootProject.ext.springBootVersion")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'qridecontroller'
+    version = 'QRIDE_ME'
+    enabled = true
+}
+
+dependencies {
+    // TIP:MODULE_RESTAPI: Gradle supports multiple representations for adding dependencies.
+    // Following is one of the ways.
+    // Add additional dependencies if any here.
+    compile("org.springframework.boot:spring-boot-starter-web:$rootProject.ext.springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-actuator:$rootProject.ext.springBootVersion")
+    compile project(':datatypes')
+    compile project(':dataaccess')
+    compile project(':qrideservice')
+
+    testCompile project(':datatypes').sourceSets.test.output
+    testCompile("com.jayway.jsonpath:json-path")
+    testCompile("org.mockito:mockito-junit-jupiter:$rootProject.ext.mockitoVersion")
+    testCompile("org.springframework.boot:spring-boot-starter-test:$rootProject.ext.springBootVersion") {
+        exclude group: 'junit', module: 'junit'
+    }
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$rootProject.ext.junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$rootProject.ext.junitVersion")
+    testCompile("org.junit.platform:junit-platform-launcher" +
+            ":$rootProject.ext.junitPlatformLauncherVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$rootProject.ext.junitVersion")
+}
+
+bootRun {
+    // TIP: Uncomment the next line, if you want to connect to the debugger.
+    // jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+}

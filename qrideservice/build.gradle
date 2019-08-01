@@ -1,0 +1,30 @@
+/*
+ * Copyright (c) Crio.Do 2018. All rights reserved
+ */
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+jar {
+    baseName = 'qrideservice'
+    version = 'QRIDE_ME'
+}
+
+dependencies {
+    // TIP:MODULE_RESTAPI: Gradle supports multiple representations for adding dependencies.
+    // Following is one of the ways.
+    // Add additional dependencies if any here.
+    compile project(':datatypes')
+    compile project(':dataaccess')
+
+    testCompile("org.mockito:mockito-junit-jupiter:$rootProject.ext.mockitoVersion")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$rootProject.ext.junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$rootProject.ext.junitVersion")
+    testCompile("org.junit.platform:junit-platform-launcher" +
+            ":$rootProject.ext.junitPlatformLauncherVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$rootProject.ext.junitVersion")
+}

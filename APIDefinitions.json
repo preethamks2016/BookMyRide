@@ -1,0 +1,176 @@
+// This is a FYI file which is not used inside the program anywhere.
+// It contains the list of all json requests/responses for the various APIs.
+
+// API URI: "/qride/v1/car_details"
+// Input: Car Id
+{
+  "carId": "CAR_ID_1"
+}
+// Output: Car & carDriver details
+{
+  "car": {
+    "carId": "CAR_ID_1",
+    "carType": "CAR_TYPE_HATCHBACK",
+    "carModel": "TOYOTA ETIOS",
+    "carLicense": "KA03 3122"
+  },
+  "carDriver": {
+    "driverId": "DRIVER_ID_1",
+    "name": "MANJUNATH",
+    "phone": "9987899891"
+  }
+}
+
+// API URI: /qride/v1/cars_in_location
+// Input: User's current location.
+{
+  "geoLocation": {
+    "latitude": 12.908486,
+    "longitude": 77.536386
+  }
+}
+// Output: Array of carStatus
+{
+  "carStatuses": [
+    {
+      "carStatus": {
+        "geoLocation": {
+          "latitude": 0.0036492730023700215,
+          "longitude": 0.04278965249297461
+        },
+        "carAvailability": "CAR_AVAILABLE"
+      }
+    },
+    {
+      "carStatus": {
+        "geoLocation": {
+          "latitude": 0.13222748716934793,
+          "longitude": 0.033663367718575685
+        },
+        "carAvailability": "CAR_AVAILABLE"
+      }
+    }
+  ]
+}
+
+// API URI: "/qride/v1/car_status"
+// Input: carId
+{
+  "carId": "CAR_ID_1"
+}
+// Output: Current location & availability of the car
+{
+  "carStatus": {
+    "geoLocation": {
+      "latitude": 77.998799,
+      "longitude": 56.079089
+    },
+    "carAvailability": "CAR_AVAILABLE"
+  }
+}
+
+// API URI: "/qride/v1/complete_trip"
+// Input: tripId, finishing location & a confirmation of the payment mode.
+{
+  "tripId": "TRIP_ID_1",
+  "finishLocation": {
+    "latitude": 12.908486,
+    "longitude": 77.536386
+  },
+  "paymentMode": "CASH_PAYMENT"
+}
+// Output: Just pass back the entire trip info as a confirmation.
+// Note that endTimeInEpochs is now populated & tripStatus is updated to TRIP_STATUS_COMPLETED.
+// If the client doesn't receive this back or receives an error in completeTripStatus, it will retry the request.
+{
+  "completeTripStatus": "SUCCESS",
+  "trip": {
+    "tripId": "TRIP_ID_1",
+    "carId": "CAR_ID_1",
+    "driverId": "DRIVER_ID_1",
+    "sourceLocation": {
+      "latitude": 12.908486,
+      "longitude": 77.536386
+    },
+    "destinationLocation": {
+      "latitude": 12.989486,
+      "longitude": 77.636386
+    },
+    "startTimeInEpochs": 1512152782,
+    "endTimeInEpochs": 1512170782,
+    "tripPrice": 129.00,
+    "tripStatus": "TRIP_STATUS_COMPLETED",
+    "paymentMode": "CASH_PAYMENT"
+  }
+}
+
+// API URI: "/qride/v1/fare_estimates"
+// Input: Source location & destination location.
+{
+  "sourceLocation": {
+    "latitude": 12.908486,
+    "longitude": 77.536386
+  },
+  "destinationLocation": {
+    "latitude": 12.908486,
+    "longitude": 77.536386
+  }
+}
+// Output: Array of EstimateForCarType
+{
+  "estimatesForCarTypes": [
+    {
+      "estimateForCarType": {
+        "carType": "CAR_TYPE_HATCHBACK",
+        "tripPrice": 129.00
+      }
+    },
+    {
+      "estimateForCarType": {
+        "carType": "CAR_TYPE_SEDAN",
+        "tripPrice": 140.00
+      }
+    },
+    {
+      "estimateForCarType": {
+        "carType": "CAR_TYPE_MINIVAN",
+        "tripPrice": 181.00
+      }
+    }
+  ]
+}
+
+// API URI: "/qride/v1/schedule_trip"
+// Input: carType, tripPrice, start/end locations
+{
+  "carType": "CAR_TYPE_HATCHBACK",
+  "tripPrice": 129.00,
+  "sourceLocation": {
+    "latitude": 12.908486,
+    "longitude": 77.536386
+  },
+  "destinationLocation": {
+    "latitude": 13.908486,
+    "longitude": 78.536386
+  }
+}
+// Output: Whether we were able to find cars & if so the trip details.
+{
+  "scheduleTripStatus": "SUCCESSFULLY_BOOKED",
+  "trip": {
+    "tripId": "TRIP_ID_1",
+    "carId": "CAR_ID_1",
+    "driverId": "DRIVER_ID_1",
+    "sourceLocation": {
+      "latitude": 12.908486,
+      "longitude": 77.536386
+    },
+    "destinationLocation": {
+      "latitude": 13.908486,
+      "longitude": 78.536386
+    },
+    "startTimeInEpochs": 1512152782,
+    "tripPrice": 129.00,
+    "tripStatus": "TRIP_STATUS_SCHEDULED"
+  }
+}

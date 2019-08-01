@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) Crio.Do 2018. All rights reserved
+ */
+
+dependencies {
+    compile(
+            "com.fasterxml.jackson.core:jackson-core:2.9.2",
+            "com.fasterxml.jackson.core:jackson-annotations:2.9.2",
+            "com.fasterxml.jackson.core:jackson-databind:2.9.2",
+            "javax.validation:validation-api:1.1.0.Final",
+            "javax.persistence:javax.persistence-api:2.2",
+            "org.apache.commons:commons-lang3:3.0"
+            // TIP:MODULE_SERIALIZATION: Add additional dependencies if any here.
+
+    )
+
+    // TIP:MODULE_SERIALIZATION: Gradle supports multiple representations for the above line.
+    // Following is another way:
+    // testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    testCompile("org.skyscreamer:jsonassert:1.5.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$rootProject.ext.junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$rootProject.ext.junitVersion")
+    testCompile("org.junit.platform:junit-platform-launcher" +
+            ":$rootProject.ext.junitPlatformLauncherVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$rootProject.ext.junitVersion")
+}
+
+jar {
+    baseName = 'datatypes'
+    version = 'QRIDE_ME'
+}
